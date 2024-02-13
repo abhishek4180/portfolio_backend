@@ -3,15 +3,23 @@ const { uploadCloudinary } = require("../utils/uploadCloudinary");
 
 exports.createProject = async (req, res) => {
     try {
-        const {  title, description, github, url } = req.body;
+        const { title, description, github, url } = req.body;
 
-        const {thumbnail} = req.files.thumbnail;
+        const { thumbnail } = req.files;
+
+        // Check if thumbnail is undefined or null
+        if (!thumbnail) {
+            return res.status(400).json({
+                success: false,
+                message: "Thumbnail file is missing"
+            });
+        }
 
         const uploadThumbnail = await uploadCloudinary(process.env.FOLDER_NAME, thumbnail.tempFilePath);
 
         // Create a new project document
         const project = new Project({
-            thumbnail:uploadThumbnail.url,
+            thumbnail: uploadThumbnail.url,
             title: title,
             description: description,
             github: github,
@@ -58,10 +66,10 @@ exports.getProject = async (req, res) => {
 
 exports.deleteProject = async (req, res) => {
     try {
-        const { projectId } = req.params;
+        const { id } = req.params;
 
         // Find the project document by ID and delete it
-        const deletedProject = await Project.findByIdAndDelete(projectId);
+        const deletedProject = await Project.findByIdAndDelete(id);
 
         if (!deletedProject) {
             return res.status(404).json({

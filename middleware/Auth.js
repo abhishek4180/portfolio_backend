@@ -52,6 +52,7 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
     try {
         Admin = false;
+        console.log("Admin", Admin)
         if (Admin) {
             return res.status(400).json({
                 success: false,

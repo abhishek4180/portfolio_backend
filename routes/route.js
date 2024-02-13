@@ -48,7 +48,9 @@ router.get('/getuser', getUser );
 // project
 
 router.post('/admin/createproject', isAdmin, createProject )
-router.delete('/admin/deleteprojec/deleteId', isAdmin, deleteProject )
+//router.delete('/admin/delete-project-profile/:id ', isAdmin, deleteProject )
+
+router.delete('/admin/delete/:id',isAdmin,deleteProject);
 router.get('/getproject', getProject )
 
 

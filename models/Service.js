@@ -14,6 +14,11 @@ const serviceSchema = mongoose.Schema({
         type:String,
         
     }
+    ,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
     
 })
 
