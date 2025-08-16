@@ -5,7 +5,9 @@ require("dotenv").config();
 const fileUpload = require("express-fileupload");
 const app = express();
 const cors = require('cors');
-app.use(cors({ origin: 'https://portfoliofronted.vercel.app', credentials: true }));
+//app.use(cors({ origin: 'https://portfoliofronted.vercel.app', credentials: true }));
+app.use(cors({ origin: process.env.localHost, credentials: true }));
+
 require("./config/database").connect();
 const PORT = process.env.PORT || 3000;
 

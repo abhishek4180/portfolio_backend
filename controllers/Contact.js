@@ -13,7 +13,7 @@ exports.Contact = async (req,res) => {
                 message:"All field are required"
             })
         }
-        const Admin = await mailSender('rahulkumarv269@gmail.com',
+        const Admin = await mailSender(process.env.MAIL_USER,
          `Portfolio - ${subject}`, AdminEmail(firstName,lastName,email,subject,message)  );
          console.log("Admin Email", Admin);
 
