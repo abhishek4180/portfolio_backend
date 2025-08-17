@@ -4,6 +4,8 @@ require("dotenv").config();
 exports.connect = async () => {
     try {
         console.log("Before Database connection");
+        console.log("Mongo URL:", process.env.MONGODB_URL);
+
         await mongoose.connect(process.env.MONGODB_URL, {
             useNewUrlParser:true,
             useUnifiedTopology:true
