@@ -1,24 +1,15 @@
 const mongoose = require("mongoose");
-
-let isConnected = null; // Track connection
+require("dotenv").config();
 
 exports.connect = async () => {
-  if (isConnected) {
-    console.log("=> Using existing database connection");
-    return;
-  }
-
-  try {
-    console.log("=> Connecting to database");
-    const db = await mongoose.connect(process.env.MONGODB_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
-
-    isConnected = db.connections[0].readyState;
-    console.log("=> Database connected successfully");
-  } catch (error) {
-    console.error("=> Error in db connection: ", error.message);
-    throw error;
-  }
-};
+    try {
+        console.log("Before Database connection");
+        await mongoose.connect(process.env.MONGODB_URL, {
+            useNewUrlParser:true,
+            useUnifiedTopology:true
+        });
+        console.log("Db connected Successfully");
+    } catch (error) {
+        console.error('Error in db connection: ', error.message);
+    }
+}
